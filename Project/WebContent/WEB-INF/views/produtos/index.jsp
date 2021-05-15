@@ -1,7 +1,4 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" >
-
-
-
 <div class="container mt-5">
 <h1 class="mb-5">Cadastro de Produto</h1>
 <form action="cadastroproduto" method="post">
