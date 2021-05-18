@@ -6,5 +6,6 @@
 </head>
 <body>
 <p>teste</p>
+<a href="produto">Produto</a>
 </body>
 </html>

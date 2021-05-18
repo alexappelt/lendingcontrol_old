@@ -35,7 +35,7 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoDAO produtoDao;
 	
-	@RequestMapping(value = "/produtos", method = RequestMethod.GET)
+	@RequestMapping(value = "/produto", method = RequestMethod.GET)
 	public String acessoCliente(Model model, HttpSession session) {
 		System.out.println("chamou produto");
 		
@@ -45,12 +45,12 @@ public class ProdutoController {
 		Produto p = new Produto();
 		model.addAttribute("produto", p);
 
-		return "produtos/index";
+		return "produto/produtoCrud";
 	}
 	
 	@RequestMapping(path = "produtoSave", method = RequestMethod.POST)
 	public String save(@ModelAttribute("produto") Produto prod, HttpSession session) {
-		
+		System.out.println("chamou save");
 		if (prod.getId() == 0) {
 			produtoDao.insertProduto(prod);
 		}else {
@@ -64,16 +64,16 @@ public class ProdutoController {
 		return "redirect:/produto";
 	}
 	
-	@RequestMapping(path = "produtoEdit/{id}", method = RequestMethod.GET)
+	@RequestMapping(path = "produto/produtoEdit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable int id, Model model, HttpSession session) {
-		
-		List<Produto> listaProdutos = produtoDao.getProdutos();
-		model.addAttribute("produto", listaProdutos);
+		System.out.println("chamou edit");
+		List<Produto> listaProduto = produtoDao.getProdutos();
+		model.addAttribute("produto", listaProduto);
 		
 		Produto p = produtoDao.getProdutoById(id);
 		model.addAttribute("produto", p);
 		
-		return "produtoCrud";
+		return "produto/produtoCrud";
 	}
 	
 	public ProdutoDAO getProdutoDao() {
