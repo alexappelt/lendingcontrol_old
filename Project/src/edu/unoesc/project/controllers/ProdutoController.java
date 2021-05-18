@@ -3,43 +3,84 @@ package edu.unoesc.project.controllers;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.text.html.FormSubmitEvent.MethodType;
+import javax.xml.crypto.dsig.spec.ExcC14NParameterSpec;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import edu.unoesc.project.models.Produto;
+import edu.unoesc.project.DAO.ProdutoDAO;
 
 @Controller
 public class ProdutoController {
 	
-	@RequestMapping(value = "/produtos", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		System.out.println("Home Page Requested, locale = " + locale);
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
+	@Autowired
+	private ProdutoDAO produtoDao;
+	
+	@RequestMapping(value = "/produto", method = RequestMethod.GET)
+	public String acessoCliente(Model model, HttpSession session) {
+		System.out.println("chamou produto");
 		
+		List<Produto> listaProduto = this.produtoDao.getProdutos();
 		
-		String formattedDate = dateFormat.format(date);
+		model.addAttribute("listaProduto", listaProduto);
+		Produto p = new Produto();
+		model.addAttribute("produto", p);
 
-		model.addAttribute("serverTime", formattedDate);
-
-		return "produtos/index";
+		return "produto/produtoCrud";
 	}
 	
-	@RequestMapping(value = "/cadastroproduto", method = RequestMethod.POST)
-	public String cadastro(Locale locale, Model model) {
-		System.out.println("Passou aqui");
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
+	@RequestMapping(path = "produtoSave", method = RequestMethod.POST)
+	public String save(@ModelAttribute("produto") Produto prod, HttpSession session) {
+		System.out.println("chamou save");
+		if (prod.getId() == 0) {
+			produtoDao.insertProduto(prod);
+		}else {
+			Produto p = (Produto) produtoDao.getProdutoById(prod.getId());
+			p.setDescricao(prod.getDescricao());
+			p.setMarca(prod.getMarca());
+			p.setCor(prod.getCor());
+			p.setValor(prod.getValor());
+		}
 		
-		
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-
-		return "produtos/index";
+		return "redirect:/produto";
 	}
-
+	
+	@RequestMapping(path = "produto/produtoEdit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable int id, Model model, HttpSession session) {
+		System.out.println("chamou edit");
+		List<Produto> listaProduto = produtoDao.getProdutos();
+		model.addAttribute("produto", listaProduto);
+		
+		Produto p = produtoDao.getProdutoById(id);
+		model.addAttribute("produto", p);
+		
+		return "produto/produtoCrud";
+	}
+	
+	public ProdutoDAO getProdutoDao() {
+		return produtoDao;
+	}
+	
+	public void setProdutoDao(ProdutoDAO produtoDao) {
+		this.produtoDao = produtoDao;
+	}
 }
