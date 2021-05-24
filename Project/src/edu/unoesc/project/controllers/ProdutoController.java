@@ -3,6 +3,9 @@ package edu.unoesc.project.controllers;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +32,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.unoesc.project.models.Produto;
 import edu.unoesc.project.DAO.ProdutoDAO;
 
-@Controller
+@ManagedBean(name="clienteMB")
+@RequestScoped
 public class ProdutoController {
 	
-	@Autowired
+	private List<Produto> listProdutos;
+	private Produto cli = new Produto();
+
+	@ManagedProperty(value="#{ClienteDAO}")
 	private ProdutoDAO produtoDao;
 	
 	@RequestMapping(value = "/produto", method = RequestMethod.GET)
