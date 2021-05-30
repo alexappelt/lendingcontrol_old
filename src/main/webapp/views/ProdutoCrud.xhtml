@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:body>
+<h:head>
+	<h:form name="breadCrump">
+		<p:breadCrumb> 
+			<p:menuitem value="Categories"/>
+			<p:menuitem value="Produtos"/>
+		</p:breadCrumb>
+	</h:form>
+</h:head>
+
+
+	<p:panel style="width:70%; margin: 20px auto;" id="panel"  header="Produto">
+		<p:dataTable var="p" value="#{produtoMB.produtos}" scrollable="true"
+			scrollHeight="400">
+			<p:column headerText="Descrição">
+				<p:outputLabel value="#{p.descricao}" />
+			</p:column>
+
+			<p:column headerText="Marca">
+				<p:outputLabel value="#{p.marca}" />
+			</p:column>
+
+			<p:column headerText="Cor">
+				<p:outputLabel value="#{p.cor}" />
+			</p:column>
+			
+			<p:column headerText="Valor">
+				<p:outputLabel value="#{p.valor}" />
+			</p:column>
+
+			<p:column width="80">
+				<h:form>
+					<p:commandButton icon="pi pi-pencil"
+						action="#{clienteMB.edit(p.id)}" update="panelCad" />
+				</h:form>
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+
+	<p:panel id="panelCad" header="Cadastro" style="margin: 20px auto; width:40%;">
+		<h:form>
+			<h:inputHidden value="#{produtoMB.produto.id}" />
+
+			<p:growl id="growl" sticky="false" showDetail="false" />
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+				<h:outputText value="Descrição: " />
+				<p:inputText value="#{produtoMB.produto.descricao}" required="true"
+					label="Nome" />
+
+				<h:outputText value="Marca: " />
+				<p:inputText value="#{produtoMB.produto.marca}" />
+				
+				<h:outputText value="Cor: " />
+				<p:inputText value="#{produtoMB.produto.cor}" />
+
+
+				<p:commandButton value="Salvar" icon="ui-icon-disk" update="panel panelCad"
+					action="#{produtoMB.produtosave}" style="margin-right:20px;" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+
+</h:body>
+</html> 
