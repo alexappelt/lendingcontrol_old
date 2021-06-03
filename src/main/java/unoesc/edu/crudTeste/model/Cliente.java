@@ -20,9 +20,25 @@ public class Cliente{
 		@Column
 		private String sobrenome;
 		@Column
+		private String usuario;
+		@Column
+		private String senha;
+		@Column
 		private Integer idade;
 		
 		
+		public String getUsuario() {
+			return usuario;
+		}
+		public void setUsuario(String usuario) {
+			this.usuario = usuario;
+		}
+		public String getSenha() {
+			return senha;
+		}
+		public void setSenha(String senha) {
+			this.senha = senha;
+		}
 		public int getId() {
 			return id;
 		}

@@ -5,18 +5,25 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+
+import unoesc.edu.crudTeste.DAO.EstadoDAO;
 import unoesc.edu.crudTeste.DAO.ProdutoDAO;
+import unoesc.edu.crudTeste.model.Estado;
 import unoesc.edu.crudTeste.model.Produto;
 
 @ManagedBean(name="produtoMB")
 @RequestScoped
 public class ProdutoController {
 	
+	private List<Produto> produtos; 
+	private List<Estado> estados;
+	private Produto produto = new Produto();
+	
 	@ManagedProperty(value="#{ProdutoDAO}")
 	private ProdutoDAO produtoDao;
 	
-	private Produto produto = new Produto();
-	private List<Produto> produtos; 
+	@ManagedProperty(value="#{EstadoDAO}")
+	private EstadoDAO estadoDao;
 
 	public void produtosave() {
 
@@ -68,6 +75,26 @@ public class ProdutoController {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+
+
+	public List<Estado> getEstados() {
+		return estados;
+	}
+
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
+	}
+
+
+	public EstadoDAO getEstadoDao() {
+		return estadoDao;
+	}
+
+
+	public void setEstadoDao(EstadoDAO estadoDao) {
+		this.estadoDao = estadoDao;
 	}
 	
 	

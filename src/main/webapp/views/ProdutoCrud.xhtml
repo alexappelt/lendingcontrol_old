@@ -29,13 +29,9 @@
 			<p:column headerText="Marca">
 				<p:outputLabel value="#{p.marca}" />
 			</p:column>
-
-			<p:column headerText="Cor">
-				<p:outputLabel value="#{p.cor}" />
-			</p:column>
 			
-			<p:column headerText="Valor">
-				<p:outputLabel value="#{p.valor}" />
+			<p:column headerText="Estado">
+				<p:outputLabel value="#{p.estado.descricao}" />
 			</p:column>
 
 			<p:column width="80">
@@ -57,12 +53,17 @@
 				<h:outputText value="Descrição: " />
 				<p:inputText value="#{produtoMB.produto.descricao}" required="true"
 					label="Nome" />
-
+					
 				<h:outputText value="Marca: " />
 				<p:inputText value="#{produtoMB.produto.marca}" />
-				
-				<h:outputText value="Cor: " />
-				<p:inputText value="#{produtoMB.produto.cor}" />
+	
+					
+				<p:outputLabel for="@next" value="Estado:" />
+				<p:selectOneMenu id="estado" value="#{produtoMB.produto.estado}"
+					converter="estadoConverter" style="width:125px">
+					<f:selectItems value="#{produtoMB.estados}" var="pes"
+						itemLabel="#{pes.descricao}" itemValue="#{pes}" />
+				</p:selectOneMenu>
 
 
 				<p:commandButton value="Salvar" icon="ui-icon-disk" update="panel panelCad"

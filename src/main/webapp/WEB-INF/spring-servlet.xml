@@ -57,7 +57,8 @@
     </bean>
  
  	<bean id="ClienteDAO" class="unoesc.edu.crudTeste.DAO.ClienteDAOImpl"></bean>
-
+	<bean id="ProdutoDAO" class="unoesc.edu.crudTeste.DAO.ProdutoDAOImpl"></bean>
+	<bean id="EstadoDAO" class="unoesc.edu.crudTeste.DAO.EstadoDAOImpl"></bean>
     
     <tx:annotation-driven />
     <bean id="transactionManager"  class="org.springframework.orm.hibernate5.HibernateTransactionManager">

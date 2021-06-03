@@ -7,5 +7,6 @@
     <session-factory>
         <mapping class="unoesc.edu.crudTeste.model.Cliente"></mapping>
         <mapping class="unoesc.edu.crudTeste.model.Produto"></mapping>
+        <mapping class="unoesc.edu.crudTeste.model.Estado"></mapping>
     </session-factory>
 </hibernate-configuration>
