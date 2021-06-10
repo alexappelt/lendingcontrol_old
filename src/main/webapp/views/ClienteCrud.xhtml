@@ -9,25 +9,22 @@
 
 
 <h:body>
-<h:head>
-	<h:form name="breadCrump">
-		<p:breadCrumb> 
-			<p:menuitem value="Categories"/>
-			<p:menuitem value="Clientes"/>
-		</p:breadCrumb>
-	</h:form>
-</h:head>
+	<h:head>
+		<h:form name="breadCrump">
+			<p:breadCrumb>
+				<p:menuitem value="Categories" />
+				<p:menuitem value="Clientes" />
+			</p:breadCrumb>
+		</h:form>
+	</h:head>
 
 
-	<p:panel style="width:70%; margin: 20px auto;" id="panel"  header="Cliente">
+	<p:panel style="width:70%; margin: 20px auto;" id="panel"
+		header="Cliente">
 		<p:dataTable var="p" value="#{clienteMB.clientes}" scrollable="true"
 			scrollHeight="400">
 			<p:column headerText="Nome">
 				<p:outputLabel value="#{p.nome}" />
-			</p:column>
-
-			<p:column headerText="Sobrenome">
-				<p:outputLabel value="#{p.sobrenome}" />
 			</p:column>
 
 			<p:column headerText="Idade">
@@ -43,7 +40,8 @@
 		</p:dataTable>
 	</p:panel>
 
-	<p:panel id="panelCad" header="Cadastro" style="margin: 20px auto; width:40%;">
+	<p:panel id="panelCad" header="Cadastro"
+		style="margin: 20px auto; width:40%;">
 		<h:form>
 			<h:inputHidden value="#{clienteMB.cliente.id}" />
 
@@ -54,19 +52,17 @@
 				<p:inputText value="#{clienteMB.cliente.nome}" required="true"
 					label="Nome" />
 
-				<h:outputText value="Sobrenome: " />
-				<p:inputText value="#{clienteMB.cliente.sobrenome}" />
-				
 				<h:outputText value="Idade: " />
 				<p:inputText value="#{clienteMB.cliente.idade}" />
 
 
-				<p:commandButton value="Salvar" icon="ui-icon-disk" update="panel panelCad"
-					action="#{clienteMB.clientesave}" style="margin-right:20px;" />
+				<p:commandButton value="Salvar" icon="ui-icon-disk"
+					update="panel panelCad" action="#{clienteMB.clientesave}"
+					style="margin-right:20px;" />
 
 			</h:panelGrid>
 		</h:form>
 	</p:panel>
 
 </h:body>
-</html> 
+</html>
