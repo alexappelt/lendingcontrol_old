@@ -11,45 +11,52 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-        	
-<context:component-scan base-package="unoesc.edu.crudTeste"/>
-    <context:annotation-config/>
-    <context:spring-configured/>
 
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<context:component-scan
+		base-package="unoesc.edu.crudTeste" />
+	<context:annotation-config />
+	<context:spring-configured />
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/crud_teste"/>
-        <property name="username" value="postgres" />
-        <property name="password" value="postgres"/>
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
 
-    </bean>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgresql://localhost:5432/crud_teste" />
+		<property name="username" value="postgres" />
+		<property name="password" value="postgres" />
 
-    <bean id="SessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" >
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation">
-            <value>/META-INF/hibernate.cfg.xml</value>
-        </property>
-        <property name="packagesToScan">
-            <list>
-                <value>unoesc.edu.crudTeste.model</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.format_sql">false</prop>
-            </props>
-        </property>       
-    </bean>
+	</bean>
 
-    <tx:annotation-driven />
-    <bean id="transactionManager"  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="SessionFactory" />
-    </bean>
+	<bean id="SessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation">
+			<value>/META-INF/hibernate.cfg.xml</value>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>unoesc.edu.crudTeste.model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+	</bean>
 
-    <bean id="persistenceExceptionTranslationPostProcessor"
-        class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>		
+	<tx:annotation-driven />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="SessionFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 </beans>
