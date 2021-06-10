@@ -9,17 +9,18 @@
 
 
 <h:body>
-<h:head>
-	<h:form name="breadCrump">
-		<p:breadCrumb> 
-			<p:menuitem value="Categories"/>
-			<p:menuitem value="Produtos"/>
-		</p:breadCrumb>
-	</h:form>
-</h:head>
+	<h:head>
+		<h:form name="breadCrump">
+			<p:breadCrumb>
+				<p:menuitem value="Home" url="index.xhtml"/>
+				<p:menuitem value="Produtos" />
+			</p:breadCrumb>
+		</h:form>
+	</h:head>
 
 
-	<p:panel style="width:70%; margin: 20px auto;" id="panel"  header="Produto">
+	<p:panel style="width:70%; margin: 20px auto;" id="panel"
+		header="Produto">
 		<p:dataTable var="p" value="#{produtoMB.produtos}" scrollable="true"
 			scrollHeight="400">
 			<p:column headerText="Descrição">
@@ -29,7 +30,7 @@
 			<p:column headerText="Marca">
 				<p:outputLabel value="#{p.marca}" />
 			</p:column>
-			
+
 			<p:column headerText="Estado">
 				<p:outputLabel value="#{p.estado.descricao}" />
 			</p:column>
@@ -43,7 +44,8 @@
 		</p:dataTable>
 	</p:panel>
 
-	<p:panel id="panelCad" header="Cadastro" style="margin: 20px auto; width:40%;">
+	<p:panel id="panelCad" header="Cadastro"
+		style="margin: 20px auto; width:40%;">
 		<h:form>
 			<h:inputHidden value="#{produtoMB.produto.id}" />
 
@@ -53,11 +55,11 @@
 				<h:outputText value="Descrição: " />
 				<p:inputText value="#{produtoMB.produto.descricao}" required="true"
 					label="Nome" />
-					
+
 				<h:outputText value="Marca: " />
 				<p:inputText value="#{produtoMB.produto.marca}" />
-	
-					
+
+
 				<p:outputLabel for="@next" value="Estado:" />
 				<p:selectOneMenu id="estado" value="#{produtoMB.produto.estado}"
 					converter="estadoConverter" style="width:125px">
@@ -66,12 +68,13 @@
 				</p:selectOneMenu>
 
 
-				<p:commandButton value="Salvar" icon="ui-icon-disk" update="panel panelCad"
-					action="#{produtoMB.produtosave}" style="margin-right:20px;" />
+				<p:commandButton value="Salvar" icon="ui-icon-disk"
+					update="panel panelCad" action="#{produtoMB.produtosave}"
+					style="margin-right:20px;" />
 
 			</h:panelGrid>
 		</h:form>
 	</p:panel>
 
 </h:body>
-</html> 
+</html>

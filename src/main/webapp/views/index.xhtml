@@ -10,11 +10,62 @@
 <h:head>
 </h:head>
 <h:body>
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+			if (args.validationFailed || !args.loggedIn) {
+				PF('dlg').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlg').hide();
+				$('#loginLink').fadeOut();
+			}
+		}
+	</script>
+
+	<h:form id="loginform">
+
+		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+		<p:dialog header="Usuario" widgetVar="dlg" resizable="false"
+			rendered="#{!clienteMB.logado}">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="usuario" value="Usuario:" />
+				<p:inputText id="usuario" value="#{clienteMB.cliente.usuario}"
+					required="true" label="usuario" />
+
+				<h:outputLabel for="senha" value="Senha:" />
+				<p:password id="senha" value="#{clienteMB.cliente.senha}"
+					required="true" label="senha" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Login" update="growl panelCad logoutForm"
+						action="#{clienteMB.fazLogin}"
+						oncomplete="handleLoginRequest(xhr, status, args)" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<h:form id="logoutForm">
+		<p:commandLink action="#{clienteMB.fazLogout}"
+			rendered="#{clienteMB.logado}">
+			<p:graphicImage name="img/logout.png" height="40px" />
+		</p:commandLink>
+		<h:outputLink id="linkLogin" value="javascript:void(0)"
+			onclick="PF('dlg').show();" rendered="#{!clienteMB.logado}"
+			title="login">
+			<p:graphicImage name="img/login.png" height="40px" />
+		</h:outputLink>
+	</h:form>
+
 	<p:panel id="panelCad" header="Menu"
 		style="margin: 20px auto; width:150px;">
-		<p:linkButton outcome="ClienteCrud.xhtml" value="Clientes" style="margin-right:20px; width:120px;" />
-		<p:linkButton outcome="ProdutoCrud.xhtml" value="Produtos" style="margin-right:20px; margin-top:10px; width:120px;" />
+		<p:linkButton outcome="ClienteCrud.xhtml" value="Clientes"
+			style="margin-right:20px; width:120px;" />
+		<p:linkButton outcome="ProdutoCrud.xhtml" value="Produtos"
+			style="margin-right:20px; margin-top:10px; width:120px;" />
 	</p:panel>
 
 </h:body>
-</html> 
+</html>

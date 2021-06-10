@@ -11,5 +11,6 @@ public interface ClienteDAO {
 	void insertCliente(Cliente cliente);
 	void updateCliente(Cliente cliente);
 	void deleteCliente(Cliente cliente);
+	Cliente validaLogin(String usuario, String senha);
 	
 }

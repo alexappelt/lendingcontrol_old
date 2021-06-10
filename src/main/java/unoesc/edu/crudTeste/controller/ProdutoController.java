@@ -79,6 +79,7 @@ public class ProdutoController {
 
 
 	public List<Estado> getEstados() {
+		this.estados = estadoDao.getEstados();
 		return estados;
 	}
 
